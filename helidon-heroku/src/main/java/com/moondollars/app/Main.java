@@ -10,6 +10,7 @@ import io.helidon.media.jsonp.JsonpSupport;
 import io.helidon.metrics.MetricsSupport;
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.WebServer;
+import io.helidon.webserver.staticcontent.StaticContentSupport;
 
 /**
  * The application main class.
@@ -81,6 +82,9 @@ public final class Main {
                 .register(health)                   // Health at "/health"
                 .register(metrics)                  // Metrics at "/metrics"
                 .register("/greet", greetService)
+                .register("/", StaticContentSupport.builder("/static-content")
+                    .welcomeFileName("index.html")
+                    .build())
                 .build();
     }
 }
